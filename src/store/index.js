@@ -1,10 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './counter/counterSlice';
 import InventoryTypeReducer from './InventoryType/InventoryTypeSlice';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
+import thunk from 'redux-thunk';
 
-export default configureStore({
-  reducer: {
-    counter: counterReducer,
-    inventoryType: InventoryTypeReducer,
-  },
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, InventoryTypeReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: [thunk],
 });
+
+export const persistor = persistStore(store);

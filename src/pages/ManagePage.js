@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  showAttributeTypes,
+  //showAttributeTypes,
   viewAllTypes,
   addInventoryType,
   removeInventoryType,
@@ -15,7 +15,7 @@ const ManagePage = () => {
     dispatch(addInventoryType());
   };
   const items = useSelector(viewAllTypes);
-  const attributeTypes = useSelector(showAttributeTypes);
+  // const attributeTypes = useSelector(showAttributeTypes);
   return (
     <div>
       <CardsListType

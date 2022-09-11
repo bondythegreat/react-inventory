@@ -110,11 +110,11 @@ export const InventoryTypeSlice = createSlice({
 });
 
 // Selector
-export const showAttributeTypes = (state) => state.inventoryType.attributeTypes;
-export const viewAllTypes = (state) => state.inventoryType.types;
-export const viewAllInventories = (state) => state.inventoryType.inventories;
+export const showAttributeTypes = (state) => state.attributeTypes;
+export const viewAllTypes = (state) => state.types;
+export const viewAllInventories = (state) => state.inventories;
 export const viewInventory = (state, action) =>
-  state.inventoryType.inventories.filter((item) => item.id === action.payload);
+  state.inventories.filter((item) => item.id === action.payload);
 
 // Action creators are generated for each case reducer function
 export const {

@@ -12,7 +12,6 @@ import CardItem from './CardItem';
 const CardsListType = ({ items, handleRemove, handleAdd }) => {
   const dispatch = useDispatch();
   const handleChangeLabel = (e, item) => {
-    console.log(e.target.value);
     dispatch(updateTypeLabel({ item, label: e.target.value }));
   };
   const handleAddAttribute = (idType) => {
