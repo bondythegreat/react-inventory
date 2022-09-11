@@ -1,0 +1,39 @@
+.navbar {
+  margin-bottom: 20px;
+}
+
+.card {
+  width: 340px;
+  max-width: 100%;
+}
+
+label {
+  font-size: 14px;
+}
+
+.input-group input {
+  border: 1px solid #ced4da;
+  flex: 1 1;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 3px;
+  padding: 7px 7px;
+}
+.input-group button {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 110px;
+}
+@media only screen and (max-width: 768px) {
+  .items-list {
+    margin-bottom: 80px;
+  }
+  .button-container {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #cccccc;
+    background-color: #f8f8f8;
+    text-align: center;
+  }
+}
