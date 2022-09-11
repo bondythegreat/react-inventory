@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   viewInventoriesByType,
   addInventory,
-  removeInventory,
 } from '../store/InventoryType/InventoryTypeSlice';
 import { useParams } from 'react-router-dom';
 import CardsList from '../components/Inventory/CardsList';

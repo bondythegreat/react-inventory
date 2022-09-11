@@ -49,6 +49,12 @@ export const InventoryTypeSlice = createSlice({
           { id: idAttribute, label: '', dataType: attributeType },
         ];
         inventoryType.attributes = newAttributes;
+        // set this attribute as default title if empty
+        inventoryType.titleAttributesId =
+          inventoryType.titleAttributesId === ''
+            ? idAttribute
+            : inventoryType.titleAttributesId;
+        debugger;
       }
     },
     updateAttribute: (state, action) => {
