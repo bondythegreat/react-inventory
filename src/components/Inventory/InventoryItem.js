@@ -11,8 +11,10 @@ import CardItem from './CardItem';
 const InventoryItem = ({ item, inventoryType }) => {
   const dispatch = useDispatch();
   const inventory = useSelector(viewInventoryById(item.id));
-  const idTitle = inventoryType.titleAttributesId || '';
-  const title = `${inventoryType.label} - ${inventory.attributes[idTitle]}`;
+  const idTitle = inventoryType.titleAttributesId;
+  const title = `${inventoryType.label} - ${
+    inventory.attributes[idTitle] || ''
+  }`;
   const handleRemove = (item) => dispatch(removeInventory(item));
   const handleChange = (e, item, attrId) => {
     dispatch(updateInventoryAttribute({ item, attrId, value: e.target.value }));

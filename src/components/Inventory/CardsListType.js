@@ -50,9 +50,11 @@ const CardsListType = ({ items, handleRemove, handleAdd }) => {
               >
                 {item.attributes.map((attr, idx) => {
                   return (
-                    <option key={idx} value={attr.id}>
-                      {attr.label}
-                    </option>
+                    attr.label !== '' && (
+                      <option key={idx} value={attr.id}>
+                        {attr.label}
+                      </option>
+                    )
                   );
                 })}
               </Input>

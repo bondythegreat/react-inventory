@@ -8,7 +8,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-
+  const closeMenu = () => setIsOpen(false);
   const inventoryTypes = useSelector(viewAllTypes);
 
   return (
@@ -20,7 +20,7 @@ const Navbar = () => {
       <Collapse isOpen={isOpen} navbar>
         <ul className='navbar-nav mr-auto'>
           <li className='nav-item active'>
-            <Link className='nav-link' to='/'>
+            <Link className='nav-link' onClick={closeMenu} to='/'>
               All Types
             </Link>
           </li>
@@ -28,7 +28,11 @@ const Navbar = () => {
             return (
               inventoryType.label !== '' && (
                 <li className='nav-item' key={inventoryType.id}>
-                  <Link className='nav-link' to={`/type/${inventoryType.id}`}>
+                  <Link
+                    className='nav-link'
+                    onClick={closeMenu}
+                    to={`/type/${inventoryType.id}`}
+                  >
                     {inventoryType.label}
                   </Link>
                 </li>
@@ -37,7 +41,7 @@ const Navbar = () => {
           })}
 
           <li className='nav-item'>
-            <Link className='nav-link' to='/manage'>
+            <Link className='nav-link' onClick={closeMenu} to='/manage'>
               Manage Type
             </Link>
           </li>
