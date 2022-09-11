@@ -16,7 +16,9 @@ const CustomButtonDropdown = () => {
       isOpen={dropdownOpen}
       toggle={toggleDropdown}
     >
-      <DropdownToggle caret>Add Item</DropdownToggle>
+      <DropdownToggle caret color='primary'>
+        Add Item
+      </DropdownToggle>
       <DropdownMenu>
         <DropdownItem header>Header</DropdownItem>
         <DropdownItem disabled>Action</DropdownItem>

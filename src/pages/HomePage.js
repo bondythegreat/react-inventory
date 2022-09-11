@@ -1,35 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  viewAllTypes,
+  addInventory,
+  viewInventoriesByType,
+} from '../store/InventoryType/InventoryTypeSlice';
 import CardsList from '../components/Inventory/CardsList';
 
-const sampleData = [
-  {
-    id: 1,
-    typeId: 1234,
-    title: 'helo',
-    body: 'body1',
-  },
-  {
-    id: 2,
-    typeId: 1234,
-    title: 'helo 2',
-    body: 'body2',
-  },
-  {
-    id: 3,
-    typeId: 1234,
-    title: 'helo 3',
-    body: 'body3',
-  },
-];
 const HomePage = () => {
-  const [items, setItems] = useState(sampleData);
-  const handleRemove = (selectedItem) => {
-    const finalItems = items.filter((item) => item !== selectedItem);
-    setItems(finalItems);
+  const dispatch = useDispatch();
+
+  const HandleAdd = (idType) => {
+    dispatch(addInventory(idType));
   };
+  const typeItems = useSelector(viewAllTypes);
+  const GetInventoriesByType = (idType) =>
+    useSelector(viewInventoriesByType(idType));
   return (
     <div>
-      <CardsList items={items} handleRemove={handleRemove} />
+      {typeItems.map((typeItem) => {
+        const items = GetInventoriesByType(typeItem.id);
+
+        return (
+          <div className='mb-2' key={typeItem.id}>
+            <h2 className='mb-2'>{typeItem.label}</h2>
+            <CardsList
+              items={items}
+              idType={typeItem.id}
+              handleAdd={HandleAdd}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };

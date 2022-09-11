@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { viewAllTypes } from '../store/InventoryType/InventoryTypeSlice';
 import { Link } from 'react-router-dom';
+import { Collapse, NavbarToggler } from 'reactstrap';
 
 const Navbar = () => {
-  const [mobileMenu, setMobileMenu] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleClickMenu = () => {
-    setMobileMenu(!mobileMenu);
-  };
-  const showClass = mobileMenu ? 'show' : '';
+  const toggle = () => setIsOpen(!isOpen);
 
   const inventoryTypes = useSelector(viewAllTypes);
 
@@ -18,23 +16,8 @@ const Navbar = () => {
       <Link className='nav-link me-4' to='/'>
         Inventory System
       </Link>
-      <button
-        className='navbar-toggler'
-        type='button'
-        data-toggle='collapse'
-        data-target='#navbarSupportedContent'
-        aria-controls='navbarSupportedContent'
-        aria-expanded='false'
-        aria-label='Toggle navigation'
-        onClick={toggleClickMenu}
-      >
-        <span className='navbar-toggler-icon'></span>
-      </button>
-
-      <div
-        className={`collapse navbar-collapse ${showClass}`}
-        id='navbarSupportedContent'
-      >
+      <NavbarToggler onClick={toggle} />
+      <Collapse isOpen={isOpen} navbar>
         <ul className='navbar-nav mr-auto'>
           <li className='nav-item active'>
             <Link className='nav-link' to='/'>
@@ -59,7 +42,7 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-      </div>
+      </Collapse>
     </nav>
   );
 };

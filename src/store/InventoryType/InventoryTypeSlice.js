@@ -17,8 +17,6 @@ export const InventoryTypeSlice = createSlice({
         titleAttributesId: '',
         attributes: [],
       };
-      console.log(newItem);
-      // TODO: localStorage
       state.types.push(newItem);
     },
     updateTypeLabel: (state, action) => {
@@ -26,6 +24,7 @@ export const InventoryTypeSlice = createSlice({
       const selectedType = state.types.find(
         (inventoryType) => inventoryType.id === item.id
       );
+
       if (selectedType) {
         selectedType.label = label;
       }
@@ -85,26 +84,40 @@ export const InventoryTypeSlice = createSlice({
     },
     addInventory: (state, action) => {
       const idType = action.payload;
-
       const inventoryType = state.types.find((item) => item.id === idType);
 
       if (inventoryType) {
-        // TODO: GET PROPERTY OF THIS TYPE
+        const attributeLabelIds = inventoryType.attributes.map((item) => {
+          return item.id;
+        });
+
         const newItem = {
           id: uuidv4(),
-          ...action.payload,
+          idType,
+          attributes: {},
         };
+
+        // map array of attributeLabels into object as keys
+        let obj = attributeLabelIds.reduce((ac, a) => ({ ...ac, [a]: '' }), {});
+        newItem.attributes = obj;
         state.inventories.push(newItem);
       }
     },
     removeInventory: (state, action) => {
       const inventoryItem = action.payload;
-
-      const finalTypes = state.inventoryType.inventories.filter(
+      const finalInventories = state.inventories.filter(
         (item) => item.id !== inventoryItem.id
       );
 
-      state.types = finalTypes;
+      state.inventories = finalInventories;
+    },
+    updateInventoryAttribute: (state, action) => {
+      const { item, attrId, value } = action.payload;
+
+      const selectedInventory = state.inventories.find(
+        (inventory) => inventory.id === item.id
+      );
+      selectedInventory.attributes[attrId] = value;
     },
   },
 });
@@ -112,9 +125,13 @@ export const InventoryTypeSlice = createSlice({
 // Selector
 export const showAttributeTypes = (state) => state.attributeTypes;
 export const viewAllTypes = (state) => state.types;
+export const viewTypeById = (id) => (state) =>
+  state.types.find((item) => item.id === id);
 export const viewAllInventories = (state) => state.inventories;
-export const viewInventory = (state, action) =>
-  state.inventories.filter((item) => item.id === action.payload);
+export const viewInventoryById = (id) => (state) =>
+  state.inventories.find((item) => item.id === id);
+export const viewInventoriesByType = (idType) => (state) =>
+  state.inventories.filter((item) => item.idType === idType);
 
 // Action creators are generated for each case reducer function
 export const {
@@ -128,6 +145,7 @@ export const {
   deleteAttribute,
   addInventory,
   removeInventory,
+  updateInventoryAttribute,
 } = InventoryTypeSlice.actions;
 
 export default InventoryTypeSlice.reducer;
