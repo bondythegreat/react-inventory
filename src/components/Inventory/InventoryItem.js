@@ -28,14 +28,16 @@ const InventoryItem = ({ item, inventoryType }) => {
       <div>
         {inventoryType.attributes.map((attr) => {
           return (
-            <div className='mb-2' key={attr.id}>
-              <label>{attr.label}</label>
-              <Input
-                type={attr.dataType}
-                value={inventory.attributes[attr.id]}
-                onChange={(e) => handleChange(e, item, attr.id)}
-              />
-            </div>
+            attr.label !== '' && (
+              <div className='mb-2' key={attr.id}>
+                <label>{attr.label}</label>
+                <Input
+                  type={attr.dataType}
+                  value={inventory.attributes[attr.id]}
+                  onChange={(e) => handleChange(e, item, attr.id)}
+                />
+              </div>
+            )
           );
         })}
       </div>
