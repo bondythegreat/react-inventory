@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  viewAllInventories,
+  viewInventoriesByType,
   addInventory,
   removeInventory,
 } from '../store/InventoryType/InventoryTypeSlice';
@@ -11,19 +11,14 @@ import CardsList from '../components/Inventory/CardsList';
 const TypePage = () => {
   const dispatch = useDispatch();
   let { id } = useParams();
-  const items = useSelector(viewAllInventories);
+  const items = useSelector(viewInventoriesByType(id));
 
-  const HandleRemove = (item) => dispatch(removeInventory(item));
   const HandleAdd = () => {
     dispatch(addInventory(id));
   };
   return (
     <div>
-      <CardsList
-        items={items}
-        handleRemove={HandleRemove}
-        handleAdd={HandleAdd}
-      />
+      <CardsList items={items} idType={id} handleAdd={HandleAdd} />
     </div>
   );
 };
