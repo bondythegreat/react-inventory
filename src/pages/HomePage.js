@@ -22,14 +22,16 @@ const HomePage = () => {
         const items = GetInventoriesByType(typeItem.id);
 
         return (
-          <div className='mb-2' key={typeItem.id}>
-            <h2 className='mb-2'>{typeItem.label}</h2>
-            <CardsList
-              items={items}
-              idType={typeItem.id}
-              handleAdd={HandleAdd}
-            />
-          </div>
+          typeItem.label != '' && (
+            <div className='mb-2' key={typeItem.id}>
+              <h2 className='mb-2'>{typeItem.label}</h2>
+              <CardsList
+                items={items}
+                idType={typeItem.id}
+                handleAdd={HandleAdd}
+              />
+            </div>
+          )
         );
       })}
     </div>

@@ -54,7 +54,6 @@ export const InventoryTypeSlice = createSlice({
           inventoryType.titleAttributesId === ''
             ? idAttribute
             : inventoryType.titleAttributesId;
-        debugger;
       }
     },
     updateAttribute: (state, action) => {
