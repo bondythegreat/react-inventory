@@ -2,7 +2,7 @@ import React from 'react';
 
 const CardItem = ({ title, children, handleRemove }) => {
   return (
-    <div className='card m-2'>
+    <div className='card m-md-2'>
       <div className='card-header d-flex'>
         <span className='w-100'>{title}</span>
         <button

@@ -16,9 +16,11 @@ const InventoryItem = ({ item, inventoryType }) => {
     inventory.attributes[idTitle] || ''
   }`;
   const handleRemove = (item) => dispatch(removeInventory(item));
-  const handleChange = (e, item, attrId) => {
-    dispatch(updateInventoryAttribute({ item, attrId, value: e.target.value }));
+  const handleChange = (e, item, dataType, attrId) => {
+    const value = dataType === 'checkbox' ? e.target.checked : e.target.value;
+    dispatch(updateInventoryAttribute({ item, attrId, value }));
   };
+
   return (
     <CardItem
       title={title}
@@ -27,14 +29,27 @@ const InventoryItem = ({ item, inventoryType }) => {
     >
       <div>
         {inventoryType.attributes.map((attr) => {
+          let inputProp = {
+            value: inventory.attributes[attr.id],
+          };
+
+          if (attr.dataType === 'checkbox') {
+            inputProp = {
+              defaultChecked: inventory.attributes[attr.id],
+            };
+          }
+
           return (
             attr.label !== '' && (
               <div className='mb-2' key={attr.id}>
                 <label>{attr.label}</label>
+
                 <Input
                   type={attr.dataType}
-                  value={inventory.attributes[attr.id]}
-                  onChange={(e) => handleChange(e, item, attr.id)}
+                  {...inputProp}
+                  onChange={(e) =>
+                    handleChange(e, item, attr.dataType, attr.id)
+                  }
                 />
               </div>
             )

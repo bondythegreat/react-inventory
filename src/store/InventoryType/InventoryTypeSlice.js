@@ -31,6 +31,11 @@ export const InventoryTypeSlice = createSlice({
     },
     removeInventoryType: (state, action) => {
       const selectedType = action.payload;
+      const newInventories = state.inventories.filter(
+        (item) => item.idType !== selectedType.id
+      );
+      state.inventories = newInventories;
+
       const newTypes = state.types.filter(
         (item) => item.id !== selectedType.id
       );
