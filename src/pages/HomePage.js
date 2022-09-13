@@ -22,7 +22,7 @@ const HomePage = () => {
         const items = GetInventoriesByType(typeItem.id);
 
         return (
-          typeItem.label != '' && (
+          typeItem.label !== '' && (
             <div className='mb-2' key={typeItem.id}>
               <h2 className='mb-2'>{typeItem.label}</h2>
               <CardsList
