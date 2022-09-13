@@ -131,8 +131,7 @@ export const InventoryTypeSlice = createSlice({
 // Selector
 export const showAttributeTypes = (state) =>
   state.attributeTypes.filter((item) => item.label !== '');
-export const viewAllTypes = (state) =>
-  state.types.filter((item) => item.label !== '');
+export const viewAllTypes = (state) => state.types;
 export const viewTypeById = (id) => (state) =>
   state.types.find((item) => item.id === id);
 export const viewAllInventories = (state) => state.inventories;
